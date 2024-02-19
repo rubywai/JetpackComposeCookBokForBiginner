@@ -9,22 +9,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ruby.jetpackcomposepractice.composables.ButtonsEg
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
@@ -46,23 +50,32 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MyApp() {
         val scope = rememberCoroutineScope()
-        val snackbarHostState = remember { SnackbarHostState() }
+        val hostState = remember { SnackbarHostState() }
         val navController = rememberNavController()
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
         Scaffold(
             snackbarHost = {
-                SnackbarHost(hostState = snackbarHostState)
+                SnackbarHost(hostState = hostState)
             },
             topBar = {
                 TopAppBar(
+                    navigationIcon = {
+                        if (navBackStackEntry?.destination?.route != "home") {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                            }
+                        }
+                    },
                     title = {
                         Text("Jetpack Compose Cookbook")
                     }
+
                 )
             },
             floatingActionButton = {
                 FloatingActionButton(onClick = {
                     scope.launch {
-                        snackbarHostState.showSnackbar("Snack Bar")
+                        hostState.showSnackbar("Snack Bar")
                     }
                 }) {
                     Icon(Icons.Filled.Add, contentDescription = "add")
