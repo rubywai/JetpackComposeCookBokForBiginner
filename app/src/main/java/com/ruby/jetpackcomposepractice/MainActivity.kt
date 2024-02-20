@@ -33,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ruby.jetpackcomposepractice.composables.ButtonsEg
 import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
+import com.ruby.jetpackcomposepractice.composables.RowAndColumn
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
 import kotlinx.coroutines.launch
 
@@ -99,6 +100,9 @@ class MainActivity : ComponentActivity() {
                     composable("counter"){
                         CounterPage()
                     }
+                    composable("rowNColumn"){
+                        RowAndColumn()
+                    }
                 }
             }
         }
@@ -128,6 +132,13 @@ class MainActivity : ComponentActivity() {
                 navController.navigate("counter")
             }) {
                 Text("Counter Application")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    navController.navigate("rowNColumn")
+                }) {
+                Text("Row and Column")
             }
         }
     }
