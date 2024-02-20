@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -19,7 +20,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -31,6 +31,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ruby.jetpackcomposepractice.composables.ButtonsEg
+import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
 import kotlinx.coroutines.launch
 
@@ -58,7 +59,7 @@ class MainActivity : ComponentActivity() {
                 SnackbarHost(hostState = hostState)
             },
             topBar = {
-                TopAppBar(
+                CenterAlignedTopAppBar(
                     navigationIcon = {
                         if (navBackStackEntry?.destination?.route != "home") {
                             IconButton(onClick = { navController.popBackStack() }) {
@@ -91,6 +92,9 @@ class MainActivity : ComponentActivity() {
                     composable("buttons") {
                         ButtonsEg()
                     }
+                    composable("fab_btn"){
+                        FloatingButtonEg()
+                    }
                 }
             }
         }
@@ -106,6 +110,13 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("buttons")
                 }) {
                 Text("Buttons")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    navController.navigate("fab_btn")
+                }) {
+                Text("Floating Action Buttons")
             }
         }
     }
