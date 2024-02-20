@@ -30,6 +30,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.ruby.jetpackcomposepractice.composables.BoxLayout
 import com.ruby.jetpackcomposepractice.composables.ButtonsEg
 import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
@@ -107,6 +108,9 @@ class MainActivity : ComponentActivity() {
                     composable("stack"){
                         StackLayout()
                     }
+                    composable("box"){
+                        BoxLayout()
+                    }
                 }
             }
         }
@@ -150,6 +154,13 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("stack")
                 }) {
                 Text("Stack Layout")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    navController.navigate("box")
+                }) {
+                Text("Box Layout")
             }
         }
     }
