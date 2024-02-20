@@ -31,6 +31,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ruby.jetpackcomposepractice.composables.ButtonsEg
+import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
 import kotlinx.coroutines.launch
@@ -95,6 +96,9 @@ class MainActivity : ComponentActivity() {
                     composable("fab_btn"){
                         FloatingButtonEg()
                     }
+                    composable("counter"){
+                        CounterPage()
+                    }
                 }
             }
         }
@@ -117,6 +121,13 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("fab_btn")
                 }) {
                 Text("Floating Action Buttons")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                navController.navigate("counter")
+            }) {
+                Text("Counter Application")
             }
         }
     }
