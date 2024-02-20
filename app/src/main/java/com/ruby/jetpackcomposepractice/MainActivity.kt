@@ -34,6 +34,7 @@ import com.ruby.jetpackcomposepractice.composables.ButtonsEg
 import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
 import com.ruby.jetpackcomposepractice.composables.RowAndColumn
+import com.ruby.jetpackcomposepractice.composables.StackLayout
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
 import kotlinx.coroutines.launch
 
@@ -103,6 +104,9 @@ class MainActivity : ComponentActivity() {
                     composable("rowNColumn"){
                         RowAndColumn()
                     }
+                    composable("stack"){
+                        StackLayout()
+                    }
                 }
             }
         }
@@ -139,6 +143,13 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("rowNColumn")
                 }) {
                 Text("Row and Column")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    navController.navigate("stack")
+                }) {
+                Text("Stack Layout")
             }
         }
     }
