@@ -34,6 +34,7 @@ import com.ruby.jetpackcomposepractice.composables.BoxLayout
 import com.ruby.jetpackcomposepractice.composables.ButtonsEg
 import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
+import com.ruby.jetpackcomposepractice.composables.ImageEg
 import com.ruby.jetpackcomposepractice.composables.RowAndColumn
 import com.ruby.jetpackcomposepractice.composables.StackLayout
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
@@ -87,7 +88,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            ) {
+        ) {
             Box(modifier = Modifier.padding(it)) {
                 NavHost(navController = navController, startDestination = "home") {
                     composable("home") {
@@ -96,20 +97,23 @@ class MainActivity : ComponentActivity() {
                     composable("buttons") {
                         ButtonsEg()
                     }
-                    composable("fab_btn"){
+                    composable("fab_btn") {
                         FloatingButtonEg()
                     }
-                    composable("counter"){
+                    composable("counter") {
                         CounterPage()
                     }
-                    composable("rowNColumn"){
+                    composable("rowNColumn") {
                         RowAndColumn()
                     }
-                    composable("stack"){
+                    composable("stack") {
                         StackLayout()
                     }
-                    composable("box"){
+                    composable("box") {
                         BoxLayout()
+                    }
+                    composable("image"){
+                        ImageEg()
                     }
                 }
             }
@@ -137,8 +141,8 @@ class MainActivity : ComponentActivity() {
             ElevatedButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                navController.navigate("counter")
-            }) {
+                    navController.navigate("counter")
+                }) {
                 Text("Counter Application")
             }
             ElevatedButton(
@@ -161,6 +165,14 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("box")
                 }) {
                 Text("Box Layout")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                navController.navigate("image")
+
+            }) {
+                Text("Image Composable")
             }
         }
     }
