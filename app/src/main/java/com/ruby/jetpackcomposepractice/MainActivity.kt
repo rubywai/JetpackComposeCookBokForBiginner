@@ -32,6 +32,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ruby.jetpackcomposepractice.composables.BoxLayout
 import com.ruby.jetpackcomposepractice.composables.ButtonsEg
+import com.ruby.jetpackcomposepractice.composables.CardEg
 import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
 import com.ruby.jetpackcomposepractice.composables.ImageEg
@@ -115,6 +116,9 @@ class MainActivity : ComponentActivity() {
                     composable("image"){
                         ImageEg()
                     }
+                    composable("card"){
+                        CardEg()
+                    }
                 }
             }
         }
@@ -173,6 +177,13 @@ class MainActivity : ComponentActivity() {
 
             }) {
                 Text("Image Composable")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                navController.navigate("card")
+            }) {
+                Text("Card Composable")
             }
         }
     }
