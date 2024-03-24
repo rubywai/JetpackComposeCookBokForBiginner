@@ -36,6 +36,7 @@ import com.ruby.jetpackcomposepractice.composables.CardEg
 import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
 import com.ruby.jetpackcomposepractice.composables.ImageEg
+import com.ruby.jetpackcomposepractice.composables.LazyColumnEg
 import com.ruby.jetpackcomposepractice.composables.RowAndColumn
 import com.ruby.jetpackcomposepractice.composables.StackLayout
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
@@ -119,6 +120,9 @@ class MainActivity : ComponentActivity() {
                     composable("card"){
                         CardEg()
                     }
+                    composable("lazycolumn"){
+                        LazyColumnEg()
+                    }
                 }
             }
         }
@@ -184,6 +188,13 @@ class MainActivity : ComponentActivity() {
                 navController.navigate("card")
             }) {
                 Text("Card Composable")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    navController.navigate("lazycolumn")
+                }) {
+                Text("Lazy Column Composable")
             }
         }
     }
