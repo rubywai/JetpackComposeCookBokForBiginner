@@ -37,6 +37,7 @@ import com.ruby.jetpackcomposepractice.composables.CounterPage
 import com.ruby.jetpackcomposepractice.composables.FloatingButtonEg
 import com.ruby.jetpackcomposepractice.composables.ImageEg
 import com.ruby.jetpackcomposepractice.composables.LazyColumnEg
+import com.ruby.jetpackcomposepractice.composables.LazyRowEg
 import com.ruby.jetpackcomposepractice.composables.RowAndColumn
 import com.ruby.jetpackcomposepractice.composables.StackLayout
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
@@ -123,6 +124,9 @@ class MainActivity : ComponentActivity() {
                     composable("lazycolumn"){
                         LazyColumnEg()
                     }
+                    composable("lazyrow"){
+                        LazyRowEg()
+                    }
                 }
             }
         }
@@ -195,6 +199,13 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("lazycolumn")
                 }) {
                 Text("Lazy Column Composable")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    navController.navigate("lazyrow")
+                }) {
+                Text("Lazy Row Composable")
             }
         }
     }
