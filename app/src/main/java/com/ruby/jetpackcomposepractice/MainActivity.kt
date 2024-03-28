@@ -19,12 +19,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -41,91 +44,100 @@ import com.ruby.jetpackcomposepractice.composables.LazyRowEg
 import com.ruby.jetpackcomposepractice.composables.RowAndColumn
 import com.ruby.jetpackcomposepractice.composables.StackLayout
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
+import com.ruby.jetpackcomposepractice.viewmodels.ThemeViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
 
-    @OptIn(ExperimentalMaterial3Api::class)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JetpackComposePracticeTheme {
-                MyApp()
-            }
+            MyApp()
+
         }
     }
 
     @Composable
     fun MyApp() {
+        val themeViewModel: ThemeViewModel = viewModel()
+        val isDarkTheme = themeViewModel.themeState.collectAsState()
         val scope = rememberCoroutineScope()
         val hostState = remember { SnackbarHostState() }
         val navController = rememberNavController()
         val navBackStackEntry by navController.currentBackStackEntryAsState()
-        Scaffold(
-            snackbarHost = {
-                SnackbarHost(hostState = hostState)
-            },
-            topBar = {
-                CenterAlignedTopAppBar(
-                    navigationIcon = {
-                        if (navBackStackEntry?.destination?.route != "home") {
-                            IconButton(onClick = { navController.popBackStack() }) {
-                                Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+        JetpackComposePracticeTheme(darkTheme = isDarkTheme.value) {
+            Scaffold(
+                snackbarHost = {
+                    SnackbarHost(hostState = hostState)
+                },
+                topBar = {
+                    CenterAlignedTopAppBar(
+                        navigationIcon = {
+                            if (navBackStackEntry?.destination?.route != "home") {
+                                IconButton(onClick = { navController.popBackStack() }) {
+                                    Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                                }
                             }
+                        },
+                        title = {
+                            Text("Jetpack Compose Cookbook")
+                        },
+                        actions = {
+                            Switch(checked = isDarkTheme.value, onCheckedChange = {
+                                themeViewModel.changeTheme()
+                            })
                         }
-                    },
-                    title = {
-                        Text("Jetpack Compose Cookbook")
-                    }
 
-                )
-            },
-            floatingActionButton = {
-                FloatingActionButton(onClick = {
-                    scope.launch {
-                        hostState.showSnackbar("Snack Bar")
+                    )
+                },
+                floatingActionButton = {
+                    FloatingActionButton(onClick = {
+                        scope.launch {
+                            hostState.showSnackbar("Snack Bar")
+                        }
+                    }) {
+                        Icon(Icons.Filled.Add, contentDescription = "add")
                     }
-                }) {
-                    Icon(Icons.Filled.Add, contentDescription = "add")
                 }
-            }
 
-        ) {
-            Box(modifier = Modifier.padding(it)) {
-                NavHost(navController = navController, startDestination = "home") {
-                    composable("home") {
-                        Home(navController = navController)
-                    }
-                    composable("buttons") {
-                        ButtonsEg()
-                    }
-                    composable("fab_btn") {
-                        FloatingButtonEg()
-                    }
-                    composable("counter") {
-                        CounterPage()
-                    }
-                    composable("rowNColumn") {
-                        RowAndColumn()
-                    }
-                    composable("stack") {
-                        StackLayout()
-                    }
-                    composable("box") {
-                        BoxLayout()
-                    }
-                    composable("image"){
-                        ImageEg()
-                    }
-                    composable("card"){
-                        CardEg()
-                    }
-                    composable("lazycolumn"){
-                        LazyColumnEg()
-                    }
-                    composable("lazyrow"){
-                        LazyRowEg()
+            ) {
+                Box(modifier = Modifier.padding(it)) {
+                    NavHost(navController = navController, startDestination = "home") {
+                        composable("home") {
+                            Home(navController = navController)
+                        }
+                        composable("buttons") {
+                            ButtonsEg()
+                        }
+                        composable("fab_btn") {
+                            FloatingButtonEg()
+                        }
+                        composable("counter") {
+                            CounterPage()
+                        }
+                        composable("rowNColumn") {
+                            RowAndColumn()
+                        }
+                        composable("stack") {
+                            StackLayout()
+                        }
+                        composable("box") {
+                            BoxLayout()
+                        }
+                        composable("image") {
+                            ImageEg()
+                        }
+                        composable("card") {
+                            CardEg()
+                        }
+                        composable("lazycolumn") {
+                            LazyColumnEg()
+                        }
+                        composable("lazyrow") {
+                            LazyRowEg()
+                        }
                     }
                 }
             }
@@ -181,16 +193,16 @@ class MainActivity : ComponentActivity() {
             ElevatedButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                navController.navigate("image")
+                    navController.navigate("image")
 
-            }) {
+                }) {
                 Text("Image Composable")
             }
             ElevatedButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                navController.navigate("card")
-            }) {
+                    navController.navigate("card")
+                }) {
                 Text("Card Composable")
             }
             ElevatedButton(
