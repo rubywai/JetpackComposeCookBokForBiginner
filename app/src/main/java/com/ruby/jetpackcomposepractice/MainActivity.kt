@@ -43,14 +43,13 @@ import com.ruby.jetpackcomposepractice.composables.LazyColumnEg
 import com.ruby.jetpackcomposepractice.composables.LazyRowEg
 import com.ruby.jetpackcomposepractice.composables.RowAndColumn
 import com.ruby.jetpackcomposepractice.composables.StackLayout
+import com.ruby.jetpackcomposepractice.composables.SwitchComposable
 import com.ruby.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
 import com.ruby.jetpackcomposepractice.viewmodels.ThemeViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -138,6 +137,9 @@ class MainActivity : ComponentActivity() {
                         composable("lazyrow") {
                             LazyRowEg()
                         }
+                        composable("selectedcompose"){
+                            SwitchComposable()
+                        }
                     }
                 }
             }
@@ -218,6 +220,13 @@ class MainActivity : ComponentActivity() {
                     navController.navigate("lazyrow")
                 }) {
                 Text("Lazy Row Composable")
+            }
+            ElevatedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                   navController.navigate("selectedcompose")
+            }) {
+                Text("Selected Composable")
             }
         }
     }
