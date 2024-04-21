@@ -20,7 +20,7 @@ Jetpack Compose Cookbook is a beginner-friendly Android app that demonstrates va
 
 To get started with the Jetpack Compose Cookbook app, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/your_username/jetpack-compose-cookbook.git`
+1. Clone this repository: `https://github.com/rubywai/JetpackComposeCookBokForBiginner.git`
 2. Open the project in Android Studio.
 3. Build and run the app on an Android device or emulator.
 
